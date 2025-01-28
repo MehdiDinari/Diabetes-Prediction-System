@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Page</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url("{% static 'DiabetePrediction/Images/img2.jpeg' %}") no-repeat center center/cover;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Effect */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 600px;
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        /* Table Styles */
+        table {
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 80%;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #4dc3ff, #2b78ff);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(75, 130, 255, 0.3);
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #2b78ff, #4dc3ff);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(75, 130, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to the Prediction Page</h1>
+        <p>Please enter the following information for diabetes prediction:</p>
+
+        <!-- Prediction Form -->
+        <form action="{% url 'result' %}" method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td align="right">Pregnancies:</td>
+                    <td align="left"><input type="text" name="n1"></td>
+                </tr>
+                <tr>
+                    <td align="right">Glucose Level:</td>
+                    <td align="left"><input type="text" name="n2"></td>
+                </tr>
+                <tr>
+                    <td align="right">Blood Pressure:</td>
+                    <td align="left"><input type="text" name="n3"></td>
+                </tr>
+                <tr>
+                    <td align="right">Skin Thickness:</td>
+                    <td align="left"><input type="text" name="n4"></td>
+                </tr>
+                <tr>
+                    <td align="right">Insulin Level:</td>
+                    <td align="left"><input type="text" name="n5"></td>
+                </tr>
+                <tr>
+                    <td align="right">BMI:</td>
+                    <td align="left"><input type="text" name="n6"></td>
+                </tr>
+                <tr>
+                    <td align="right">Diabetes Pedigree Function:</td>
+                    <td align="left"><input type="text" name="n7"></td>
+                </tr>
+                <tr>
+                    <td align="right">Age:</td>
+                    <td align="left"><input type="text" name="n8"></td>
+                </tr>
+            </table>
+
+            <!-- Submit Button -->
+            <button class="submit-btn" type="submit">Predict</button>
+        </form>
+
+        <!-- Display Result -->
+        {% if result2 %}
+            <h2>Prediction Result: {{ result2 }}</h2>
+        {% endif %}
+    </div>
+
+</body>
+</html>
